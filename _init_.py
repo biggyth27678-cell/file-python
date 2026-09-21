@@ -1,0 +1,1 @@
+"""HR analytics package: data loading, filtering and dashboard modules."""

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HR Insight – แดชบอร์ดข้อมูลบุคลากร</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>HR Insight</h1>
+    <p>แดชบอร์ดข้อมูลบุคลากร</p>
+  </header>
+
+  <div class="shell">
+    <aside class="rail" aria-label="ชุดข้อมูลและโมดูล">
+      <section class="rail-block" id="dataset">
+        <h2>ชุดข้อมูล</h2>
+        <div id="dataset-info" class="dataset-info"></div>
+        <div id="dropzone" class="dropzone">
+          <label class="btn btn-primary" for="file-input">อัปโหลดไฟล์ข้อมูล</label>
+          <input id="file-input" type="file" accept=".txt,.csv,.tsv,text/plain,text/csv" hidden>
+          <p>หรือลากไฟล์มาวางที่นี่</p>
+        </div>
+        <button id="use-sample" class="link" type="button" hidden>กลับไปใช้ข้อมูลตัวอย่าง</button>
+        <details class="hint">
+          <summary>รูปแบบไฟล์ที่รองรับ</summary>
+          <p>ไฟล์ .txt / .csv / .tsv ขนาดไม่เกิน 4 MB คั่นคอลัมน์ด้วย Tab, comma, semicolon หรือ |
+          ต้องมีคอลัมน์ Employee_Name, EmpID, Department, EmploymentStatus, PayRate, Sex, DateofHire
+          คอลัมน์อื่นเช่น Position, RaceDesc, PerformanceScore, RecruitmentSource เป็นตัวเลือก
+          วันที่ใช้รูปแบบ วัน-เดือน-ปี (เช่น 05-01-15)</p>
+        </details>
+      </section>
+
+      <section class="rail-block">
+        <div class="rail-head">
+          <h2>โมดูลที่แสดง</h2>
+          <span class="rail-actions">
+            <button id="mods-all" class="link" type="button">ทั้งหมด</button>
+            <button id="mods-none" class="link" type="button">ล้าง</button>
+          </span>
+        </div>
+        <nav id="module-nav" class="module-nav" aria-label="เลือกโมดูล"></nav>
+      </section>
+    </aside>
+
+    <main class="main">
+      <section class="filterbar" aria-label="ตัวกรองข้อมูล">
+        <div class="meter">
+          <p class="meter-text"><strong id="meter-count">–</strong> <span>จาก <span id="meter-total">–</span> คน</span></p>
+          <div class="meter-track" aria-hidden="true"><div id="meter-fill" class="meter-fill"></div></div>
+          <button id="filters-reset" class="link" type="button" hidden>ล้างตัวกรองทั้งหมด</button>
+        </div>
+        <div id="filter-controls" class="filter-controls"></div>
+      </section>
+
+      <div id="modules" class="modules" aria-live="polite"></div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
